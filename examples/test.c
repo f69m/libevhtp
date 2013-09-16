@@ -106,7 +106,6 @@ test_pause_cb(evhtp_request_t * request, void * arg) {
     evhtp_send_reply(request, EVHTP_RES_OK);
 }
 
-#ifndef EVHTP_DISABLE_REGEX
 static void
 _owned_readcb(evbev_t * bev, void * arg) {
     /* echo the input back to the client */
@@ -129,6 +128,8 @@ test_ownership(evhtp_request_t * request, void * arg) {
                       _owned_eventcb, NULL);
 }
 
+#ifndef EVHTP_DISABLE_REGEX
+
 static void
 test_regex(evhtp_request_t * req, void * arg) {
     evbuffer_add_printf(req->buffer_out,
@@ -138,8 +139,6 @@ test_regex(evhtp_request_t * req, void * arg) {
 
     evhtp_send_reply(req, EVHTP_RES_OK);
 }
-
-#endif
 
 static void
 dynamic_cb(evhtp_request_t * r, void * arg) {
@@ -169,6 +168,8 @@ create_callback(evhtp_request_t * r, void * arg) {
 
     evhtp_send_reply(r, EVHTP_RES_OK);
 }
+
+#endif
 
 static void
 test_foo_cb(evhtp_request_t * req, void * arg ) {
